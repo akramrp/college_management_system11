@@ -1,0 +1,78 @@
+{% extends 'staff_template/base_template.html' %}
+{% block page_title %} Live Class Room {% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Start Live Class Room:</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="{% url 'start_live_classroom_process' %}" method="post">
+                {% csrf_token %}
+                <div class="card-body">
+
+                <div class="form-group">
+                    {% if messages %}
+                    {% for msg in messages %}
+                        {% if msg.tags == 'error' %}
+                            <div class="alert alert-warning alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h5><i class="icon fas fa-ban"></i> {{ msg }} </h5>
+                            </div>
+                        {% endif %}
+                        {% if msg.tags == 'success' %}
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h5><i class="icon fas fa-check"></i> {{ msg }} </h5>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Subject:</label>
+                            <select class="form-control" name="subject" id="subject">
+                                {% for subject in subjects %}
+                                <option value="{{ subject.id }}">{{ subject.subject_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Session Year:</label>
+                            <select class="form-control" name="session_year" id="session_year">
+                                {% for session_year in session_years %}
+                                <option value="{{ session_year.id }}">{{ session_year.session_start_year }} TO {{ session_year.session_end_year }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary btn-block">Start Class</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+

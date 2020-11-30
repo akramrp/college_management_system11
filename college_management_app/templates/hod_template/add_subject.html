@@ -1,0 +1,90 @@
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %} Add Subject {% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Add Subject Form</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="{% url 'add_subject_save' %}" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                      {% if messages %}
+                        {% for msg in messages %}
+                            {% if msg.tags == 'error' %}
+                                <div class="alert alert-warning alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-ban"></i> {{ msg }} </h5>
+                                </div>
+                            {% endif %}
+                            {% if msg.tags == 'success' %}
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-check"></i> {{ msg }} </h5>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Subject Name:</label>
+                                <input type="text" class="form-control" name="subject_name" placeholder="Enter subject name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Course:</label>
+                                <select class="form-control" name="course" required="">
+                                    <option value="">Select Course</option>
+                                    {% for course in courses %}
+                                    <option value="{{ course.id }}">{{ course.course_name }}</option>
+                                    {% endfor%}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Staff:</label>
+                                <select class="form-control" name="staff" required="">
+                                    <option value="">Select Staff</option>
+                                    {% for staff in staffs %}
+                                    <option value="{{ staff.id }}">{{ staff.first_name }} {{ staff.last_name }}</option>
+                                    {% endfor%}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-success float-right">Add Subject</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+
+{% block custom_js %}
+<script>
+</script>
+{% endblock custom_js %}
+

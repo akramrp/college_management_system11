@@ -1,0 +1,70 @@
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %}
+Edit Course  | Course Name : {{ course.course_name }} |  #ID : {{ course_id }}
+{% endblock page_title %}
+{% block main_content %}
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card">
+            <div class="card-header">
+            <h3 class="card-title">Edit Course</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form" action="{% url 'edit_course_save' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden"  name="course_id" value="{{ course_id }}">
+                <div class="card-body">
+                    <div class="form-group">
+                        {% if messages %}
+                        {% for msg in messages %}
+                            {% if msg.tags == 'error' %}
+                                <div class="alert alert-warning alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-ban"></i> {{ msg }} </h5>
+                                </div>
+                            {% endif %}
+                            {% if msg.tags == 'success' %}
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-check"></i> {{ msg }} </h5>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Course Name:</label>
+                                <input type="text" class="form-control" name="course_name" placeholder="Enter course" value="{{ course.course_name }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success float-right">Save Course</button>
+            </div>
+            </form>
+        </div>
+        <!-- /.card -->
+        </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+{% endblock main_content %}
+

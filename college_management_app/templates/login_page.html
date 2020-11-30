@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>College Management System | Log in</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static "plugins/fontawesome-free/css/all.min.css" %}">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="{% static "plugins/icheck-bootstrap/icheck-bootstrap.min.css" %}">
+  <link rel="stylesheet" href="{% static "dist/css/adminlte.min.css" %}">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href=" "><b>College</b> Management System</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign-In To | College Management System</p>
+
+      <form action="doLogin" method="post">
+          {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="email" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+<!--        <div class="input-group mb-3">-->
+<!--              <div class="g-recaptcha" data-sitekey="6LeWtqUZAAAAAMO6YmxX5_XWel9hLWrb_iEiff26"></div>-->
+<!--        </div>-->
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+
+          <div class="col-12 text-center">
+             <a href="{% url 'password_reset' %}">Reset Password</a>
+          </div>
+          <div class="col-12 text-center">
+             <a href="{% url 'signup_admin' %}">Admin Signup FOR TESTING</a>
+          </div>
+          <div class="col-12 text-center">
+             <a href="{% url 'signup_staff' %}">Staff Signup FOR TESTING</a>
+          </div>
+          <div class="col-12 text-center">
+             <a href="{% url 'signup_student' %}">Student Signup FOR TESTING</a>
+          </div>
+        </div>
+        <div class="row">
+            {% if messages %}
+            <div class="col-12">
+                {% for msg in messages %}
+                    {% if msg.tags == 'error' %}
+                        <div class="alert alert-danger" style="margin-top:10px;"> {{ msg }} </div>
+                    {% endif %}
+                    {% if msg.tags == 'success' %}
+                        <div class="alert alert-success" style="margin-top:10px;"> {{ msg }} </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+      </form>
+
+<!--      <p class="mb-1">-->
+<!--        <a href="forgot-password.html">I forgot my password</a>-->
+<!--      </p>-->
+<!--      <p class="mb-0">-->
+<!--        <a href="register.html" class="text-center">Register a new membership</a>-->
+<!--      </p>-->
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<script src="{% static "plugins/jquery/jquery.min.js" %}"></script>
+<script src="{% static "plugins/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+<script src="{% static "dist/js/adminlte.min.js" %}"></script>
+
+</body>
+</html>

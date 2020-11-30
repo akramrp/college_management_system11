@@ -1,0 +1,97 @@
+{% extends 'hod_template/base_template.html' %}
+{% block page_title %} Manage Session Year {% endblock page_title %}
+{% block main_content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Add Session Year Form &nbsp;&nbsp; | {{ date }}</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form role="form" action="{% url 'add_session_save' %}" method="post">
+                  {% csrf_token %}
+                <div class="card-body">
+                    <div class="form-group">
+                      {% if messages %}
+                        {% for msg in messages %}
+                            {% if msg.tags == 'error' %}
+                                <div class="alert alert-warning alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-ban"></i> {{ msg }} </h5>
+                                </div>
+                            {% endif %}
+                            {% if msg.tags == 'success' %}
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-check"></i> {{ msg }} </h5>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Session Start Year:</label>
+                                <input type="date" class="form-control" name="session_start" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Session End Year:</label>
+                                <input type="date" class="form-control" name="session_end" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-success float-right">Add Session Year</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+
+          <!-- /.card-header -->
+          <hr>
+          <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Session Start Date</th>
+                  <th>Session End Date</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for session in sessions %}
+                <tr>
+                  <td>{{ session.id }}</td>
+                  <td>{{ session.session_start_year }}</td>
+                  <td>{{ session.session_end_year }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+
+          </div>
+      </div>
+    </section>
+    <!-- /.content -->
+{% endblock main_content %}
+
+{% block custom_js %}
+<script>
+</script>
+{% endblock custom_js %}
+
