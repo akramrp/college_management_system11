@@ -1,0 +1,2 @@
+# college_management_system11
+django college_management_system
